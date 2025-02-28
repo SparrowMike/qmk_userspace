@@ -1,0 +1,38 @@
+#pragma once
+
+#define MASTER_LEFT
+
+#define TAPPING_TERM 190
+
+#define SPLIT_WPM_ENABLE
+
+#define OLED_TIMEOUT 36000
+
+#ifdef RGBLIGHT_ENABLE
+    #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+    #define RGBLIGHT_EFFECT_BREATHING
+    #define RGBLIGHT_EFFECT_RAINBOW_MOOD
+    #define RGBLIGHT_EFFECT_SNAKE
+    #define RGBLIGHT_EFFECT_KNIGHT
+    #define RGBLIGHT_EFFECT_CHRISTMAS
+    #define RGBLIGHT_EFFECT_STATIC_GRADIENT
+    #define RGBLIGHT_EFFECT_RGB_TEST
+    #define RGBLIGHT_EFFECT_ALTERNATING
+    #define RGBLIGHT_EFFECT_TWINKLE
+    #define RGBLIGHT_LIMIT_VAL 120
+    #define RGBLIGHT_HUE_STEP 10
+    #define RGBLIGHT_SAT_STEP 17
+    #define RGBLIGHT_VAL_STEP 17
+#endif
+
+// INFO: graphics ----LEFT----
+#define INCLUDE_LAYERS
+
+// #define INCLUDE_LOGO // either logo or luna
+#define INCLUDE_LUNA
+
+// INFO: graphics ----RIGHT---- pick one only
+// #define INCLUDE_ARASAKA
+// #define INCLUDE_CAT
+#define INCLUDE_OCEAN
+// #define INCLUDE_BARS
