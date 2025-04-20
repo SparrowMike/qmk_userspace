@@ -3,6 +3,7 @@
     "build_targets": [
         ["crkbd/rev1", "cornie"],
         ["bastardkb/tbkmini/v2/splinky_3", "mike"],
-        ["bastardkb/skeletyl/v2/splinky_3", "mike"]
+        ["bastardkb/skeletyl/v2/splinky_3", "mike"],
+        ["geigeigeist/klor", "mike"]
     ]
 }

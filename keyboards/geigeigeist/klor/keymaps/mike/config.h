@@ -1,0 +1,9 @@
+#pragma once
+
+#define MASTER_LEFT
+
+#define TAPPING_TERM 190
+
+#define OLED_TIMEOUT 36000
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 6
