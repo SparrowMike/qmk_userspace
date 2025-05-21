@@ -1,5 +1,7 @@
 #include QMK_KEYBOARD_H
 
+#include "../boards.h"
+
 #ifdef INCLUDE_LAYERS
 #   include "./animation/layers.h"
 #endif
@@ -46,13 +48,17 @@ enum layers {
     _BASE,
     _FIRST,
     _SECOND,
-    _THIRD
+    _THIRD,
+    _FOURTH,
 };
 
 enum custom_keycodes {
     BK_TAB = SAFE_RANGE,
+    QK_MYM_3,
+    QK_MYM_4,
+    QK_MYM_1,
+    QK_MYM_2,
 };
-
 
 enum combo_events {
     DOT_SLASH_GRV,
@@ -75,7 +81,9 @@ enum combo_events {
     RF,
     UJ,
     IK,
-    OL
+    OL,
+    CAPWORD,
+    MACRO_COMBO,
 };
 
 const uint16_t PROGMEM dot_slash_grv_combo[]  = {KC_DOT, KC_SLSH, COMBO_END};
@@ -103,6 +111,9 @@ const uint16_t PROGMEM uj_combo[] = {KC_U, HM_J, COMBO_END};
 const uint16_t PROGMEM ik_combo[] = {KC_I, HM_K, COMBO_END};
 const uint16_t PROGMEM ol_combo[] = {KC_O, HM_L, COMBO_END};
 
+const uint16_t PROGMEM capword_combo[] = {KC_H, HM_J, COMBO_END};
+const uint16_t PROGMEM macro_combo[] = {KC_7, KC_9, COMBO_END};
+
 combo_t key_combos[] = {
     [ESC_QW]  = COMBO(esc_qw_combo, KC_ESC),
     [M_COMMA_ESC] = COMBO(m_comma_esc_combo, KC_ESC),
@@ -126,37 +137,32 @@ combo_t key_combos[] = {
     [RF] = COMBO(rf_combo, KC_UNDS),
     [UJ] = COMBO(uj_combo, KC_MINS),
     [IK] = COMBO(ik_combo, KC_PLUS),
-    [OL] = COMBO(ol_combo, KC_EQL)
+    [OL] = COMBO(ol_combo, KC_EQL),
+
+    [CAPWORD] = COMBO(capword_combo, CW_TOGG),
+    [MACRO_COMBO] = COMBO(macro_combo, MO(_THIRD)),
 };
+
+void register_combo(uint16_t keycode, bool pressed) {
+    if (pressed) {
+        register_code(KC_LGUI);
+        register_code(keycode);
+    } else {
+        unregister_code(keycode);
+        unregister_code(KC_LGUI);
+    }
+}
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
     switch(combo_index) {
         case CMD_Z:
-            if (pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_Z);
-            } else {
-                unregister_code(KC_Z);
-                unregister_code(KC_LGUI);
-            }
+            register_combo(KC_Z, pressed);
             break;
         case CMD_C:
-            if (pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_C);
-            } else {
-                unregister_code(KC_C);
-                unregister_code(KC_LGUI);
-            }
+            register_combo(KC_C, pressed);
             break;
         case CMD_V:
-            if (pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_V);
-            } else {
-                unregister_code(KC_V);
-                unregister_code(KC_LGUI);
-            }
+            register_combo(KC_V, pressed);
             break;
         case L_SEMI_QUOTE:
             if (pressed) {
@@ -166,6 +172,15 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             }
             break;
     }
+}
+
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    switch (combo_index) {
+        case MACRO_COMBO:
+            return layer_state_is(_SECOND);
+    }
+
+    return true;
 }
 
 tap_dance_action_t tap_dance_actions[] = {
@@ -198,6 +213,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             //`--------------------------'  `--------------------------'
 
     ),
+
     [_SECOND] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                          KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_TRNS,
@@ -209,35 +225,90 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_TRNS,   KC_TRNS,   KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS
                                             //`--------------------------'  `--------------------------'
     ),
+
+    [_THIRD] = LAYOUT_split_3x6_3(
+        //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                            KC_TRNS, KC_TRNS,  KC_TRNS,     KC_TRNS, MO(_FOURTH), KC_TRNS
+                                            //`--------------------------'  `--------------------------'
+    ),
+
+    [_FOURTH] = LAYOUT_split_3x6_3(
+        //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, QK_MYM_1,QK_MYM_3,QK_MYM_4,QK_MYM_2,KC_TRNS,
+        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                            KC_TRNS,   KC_TRNS,   KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS
+                                            //`--------------------------'  `--------------------------'
+    ),
+};
+
+void register_shift_tab(bool pressed) {
+    if (pressed) {
+        register_code(KC_LSFT);
+        register_code(KC_TAB);
+    } else {
+        unregister_code(KC_TAB);
+        unregister_code(KC_LSFT);
+    }
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            case QK_MYM_1:
+                SEND_STRING(MACRO_Z SS_TAP(X_ENTER));
+                return false;
+            case QK_MYM_2:
+                SEND_STRING(MACRO_Z SS_TAP(X_ENTER) SS_DELAY(50) MACRO_B SS_TAP(X_ENTER));
+                return false;
+            case QK_MYM_3:
+                SEND_STRING(MACRO_B SS_DELAY(20) SS_TAP(X_ENTER));
+                return false;
+            case QK_MYM_4:
+                SEND_STRING(MACRO_A SS_DELAY(20) SS_TAP(X_ENTER));
+                return false;
+        }
+    }
+
+    // Handle other cases that need both press and release events
     switch (keycode) {
+        case BK_TAB:
+            register_shift_tab(record->event.pressed);
+            return false;
         case KC_LCTL:
         case KC_RCTL:
 #ifdef INCLUDE_OCEAN
             is_calm = (record->event.pressed) ? true : false;
 #endif
-
 #ifdef INCLUDE_LUNA
             if (record->event.pressed) {
-              isSneaking = true;
+                isSneaking = true;
             } else {
-              isSneaking = false;
+                isSneaking = false;
             }
 #endif
             break;
         case KC_SPC:
 #ifdef INCLUDE_LUNA
             if (record->event.pressed) {
-              isJumping = true;
-              showedJump = false;
+                isJumping = true;
+                showedJump = false;
             } else {
-              isJumping = false;
+                isJumping = false;
             }
 #endif
             break;
     }
+
     return true;
 }
 

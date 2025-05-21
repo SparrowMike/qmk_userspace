@@ -25,6 +25,8 @@
     #define RGBLIGHT_VAL_STEP 17
 #endif
 
+#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+
 // INFO: graphics ----LEFT----
 #define INCLUDE_LAYERS
 

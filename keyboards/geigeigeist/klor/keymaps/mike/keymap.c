@@ -1,6 +1,8 @@
 #include QMK_KEYBOARD_H
 #include "../boards.h"
 
+#include "./klor.c"
+
 #define HM_A LCTL_T(KC_A)
 #define HM_S LALT_T(KC_S)
 #define HM_D LGUI_T(KC_D)
@@ -190,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_FOURTH] = LAYOUT(
                  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
       KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS, QK_MYM_1,QK_MYM_3, QK_MYM_4,QK_MYM_2, KC_TRNS,
-      KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,
+      KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, EE_CLR,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,
                                    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     )
 };
@@ -228,4 +230,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
-
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (index == 0) {
+        switch (get_highest_layer(layer_state)) {
+            case _BASE:
+                if (clockwise) {
+                    tap_code(KC_VOLU);
+                } else {
+                    tap_code(KC_VOLD);
+                }
+                break;
+        }
+    } else if (index == 1) {
+        switch (get_highest_layer(layer_state)) {
+            case _BASE:
+                // Vertical scrolling
+                if (clockwise) {
+                    tap_code(KC_WH_D);
+                } else {
+                    tap_code(KC_WH_U);
+                }
+                break;
+        }
+    }
+    return false;
+}
