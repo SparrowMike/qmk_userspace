@@ -1,4 +1,4 @@
-// Copyright 2024 QMkjK
+// Copyright 2024 QMK
 // SPDX-License-Identifier: GPL-2.0-or-later
 #include "quantum.h"
 
@@ -101,4 +101,3 @@ bool oled_task_kb(void) {
     return false;
 }
 #endif
-

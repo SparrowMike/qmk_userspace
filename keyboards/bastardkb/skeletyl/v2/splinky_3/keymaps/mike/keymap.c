@@ -25,10 +25,13 @@ enum layers {
 
 enum custom_keycodes {
     BK_TAB = SAFE_RANGE,
-    QK_MYM_3,
-    QK_MYM_4,
     QK_MYM_1,
     QK_MYM_2,
+    QK_MYM_3,
+    QK_MYM_4,
+    QK_MYM_5,
+    QK_MYM_6,
+    QK_MYM_7,
 };
 
 enum combo_events {
@@ -209,11 +212,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FOURTH] = LAYOUT_split_3x5_3(
         //,--------------------------------------------.                        ,--------------------------------------------.
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, QK_MYM_1,QK_MYM_2, KC_TRNS, KC_TRNS,
         //|--------+--------+--------+--------+--------|                        |--------+--------+--------+--------+--------|
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, QK_MYM_1,QK_MYM_3,QK_MYM_4,QK_MYM_2
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, QK_MYM_3,QK_MYM_4,QK_MYM_5, KC_TRNS,
         //|--------+--------+--------+--------+--------|                        |--------+--------+--------+--------+--------|
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, QK_MYM_6,QK_MYM_7, KC_TRNS, KC_TRNS,
         //|--------+--------+--------+--------+--------+--------|      |--------+--------+--------+--------+--------+--------|
                                    KC_TRNS, KC_TRNS,  KC_TRNS,         KC_TRNS, KC_TRNS, KC_TRNS
                                    //`--------------------------'      `--------------------------'
@@ -240,13 +243,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(MACRO_Z SS_TAP(X_ENTER));
                 return false;
             case QK_MYM_2:
-                SEND_STRING(MACRO_Z SS_TAP(X_ENTER) SS_DELAY(50) MACRO_B SS_TAP(X_ENTER));
+                SEND_STRING(MACRO_X SS_TAP(X_ENTER));
                 return false;
             case QK_MYM_3:
                 SEND_STRING(MACRO_B SS_DELAY(20) SS_TAP(X_ENTER));
                 return false;
             case QK_MYM_4:
                 SEND_STRING(MACRO_A SS_DELAY(20) SS_TAP(X_ENTER));
+                return false;
+            case QK_MYM_5:
+                SEND_STRING(MACRO_C SS_DELAY(20) SS_TAP(X_ENTER));
+                return false;
+            case QK_MYM_6:
+                SEND_STRING(MACRO_Z SS_TAP(X_ENTER) SS_DELAY(50) MACRO_B SS_TAP(X_ENTER));
+                return false;
+            case QK_MYM_7:
+                SEND_STRING(MACRO_X SS_TAP(X_ENTER) SS_DELAY(50) MACRO_B SS_TAP(X_ENTER));
                 return false;
         }
     }
