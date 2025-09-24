@@ -119,5 +119,3 @@ bool oled_task_user(){
     return false;
 }
 #endif
-
-// <<< Use Configuration Documentation (do not edit) >>>
