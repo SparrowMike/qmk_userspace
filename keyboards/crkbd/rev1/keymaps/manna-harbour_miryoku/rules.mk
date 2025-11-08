@@ -1,4 +1,5 @@
 CONVERT_TO = rp2040_ce
+USER_NAME := manna-harbour_miryoku
 
 # OLED and animation features
 OLED_ENABLE = yes
