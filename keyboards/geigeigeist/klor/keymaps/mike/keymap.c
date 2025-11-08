@@ -1,7 +1,11 @@
 #include QMK_KEYBOARD_H
-#include "../boards.h"
 
 #include "./klor.c"
+
+// Custom macro strings - define your own values
+#define MACRO_A ""  // Define what you want this to send
+#define MACRO_B ""  // Define what you want this to send
+#define MACRO_Z ""  // Define what you want this to send
 
 #define HM_A LCTL_T(KC_A)
 #define HM_S LALT_T(KC_S)
