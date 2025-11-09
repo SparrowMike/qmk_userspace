@@ -1,5 +1,5 @@
 #include QMK_KEYBOARD_H
-#include "../boards.h"
+/* #include "../boards.h" */
 
 #define HM_A LCTL_T(KC_A)
 #define HM_S LALT_T(KC_S)

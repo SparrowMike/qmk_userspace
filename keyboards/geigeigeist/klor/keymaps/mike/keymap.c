@@ -1,11 +1,7 @@
 #include QMK_KEYBOARD_H
+/* #include "../boards.h" */
 
 #include "./klor.c"
-
-// Custom macro strings - define your own values
-#define MACRO_A ""  // Define what you want this to send
-#define MACRO_B ""  // Define what you want this to send
-#define MACRO_Z ""  // Define what you want this to send
 
 #define HM_A LCTL_T(KC_A)
 #define HM_S LALT_T(KC_S)
@@ -212,25 +208,25 @@ void register_shift_tab(bool pressed) {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        switch (keycode) {
-            case BK_TAB:
-                register_shift_tab(record->event.pressed);
-                return false;
-            case QK_MYM_1:
-                SEND_STRING(MACRO_Z SS_TAP(X_ENTER));
-                return false;
-            case QK_MYM_2:
-                SEND_STRING(MACRO_Z SS_TAP(X_ENTER) SS_DELAY(50) MACRO_B SS_TAP(X_ENTER));
-                return false;
-            case QK_MYM_3:
-                SEND_STRING(MACRO_B SS_DELAY(20) SS_TAP(X_ENTER));
-                return false;
-            case QK_MYM_4:
-                SEND_STRING(MACRO_A SS_DELAY(20) SS_TAP(X_ENTER));
-                return false;
-        }
-    }
+    /* if (record->event.pressed) { */
+    /*     switch (keycode) { */
+    /*         case BK_TAB: */
+    /*             register_shift_tab(record->event.pressed); */
+    /*             return false; */
+    /*         case QK_MYM_1: */
+    /*             SEND_STRING(MACRO_Z SS_TAP(X_ENTER)); */
+    /*             return false; */
+    /*         case QK_MYM_2: */
+    /*             SEND_STRING(MACRO_Z SS_TAP(X_ENTER) SS_DELAY(50) MACRO_B SS_TAP(X_ENTER)); */
+    /*             return false; */
+    /*         case QK_MYM_3: */
+    /*             SEND_STRING(MACRO_B SS_DELAY(20) SS_TAP(X_ENTER)); */
+    /*             return false; */
+    /*         case QK_MYM_4: */
+    /*             SEND_STRING(MACRO_A SS_DELAY(20) SS_TAP(X_ENTER)); */
+    /*             return false; */
+    /*     } */
+    /* } */
     return true;
 };
 

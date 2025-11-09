@@ -1,6 +1,6 @@
 #include QMK_KEYBOARD_H
 
-#include "../boards.h"
+/* #include "../boards.h" */
 
 #ifdef INCLUDE_LAYERS
 #   include "./animation/layers.h"
@@ -262,22 +262,22 @@ void register_shift_tab(bool pressed) {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        switch (keycode) {
-            case QK_MYM_1:
-                SEND_STRING(MACRO_Z SS_TAP(X_ENTER));
-                return false;
-            case QK_MYM_2:
-                SEND_STRING(MACRO_Z SS_TAP(X_ENTER) SS_DELAY(50) MACRO_B SS_TAP(X_ENTER));
-                return false;
-            case QK_MYM_3:
-                SEND_STRING(MACRO_B SS_DELAY(20) SS_TAP(X_ENTER));
-                return false;
-            case QK_MYM_4:
-                SEND_STRING(MACRO_A SS_DELAY(20) SS_TAP(X_ENTER));
-                return false;
-        }
-    }
+    /* if (record->event.pressed) { */
+    /*     switch (keycode) { */
+    /*         case QK_MYM_1: */
+    /*             SEND_STRING(MACRO_Z SS_TAP(X_ENTER)); */
+    /*             return false; */
+    /*         case QK_MYM_2: */
+    /*             SEND_STRING(MACRO_Z SS_TAP(X_ENTER) SS_DELAY(50) MACRO_B SS_TAP(X_ENTER)); */
+    /*             return false; */
+    /*         case QK_MYM_3: */
+    /*             SEND_STRING(MACRO_B SS_DELAY(20) SS_TAP(X_ENTER)); */
+    /*             return false; */
+    /*         case QK_MYM_4: */
+    /*             SEND_STRING(MACRO_A SS_DELAY(20) SS_TAP(X_ENTER)); */
+    /*             return false; */
+    /*     } */
+    /* } */
 
     // Handle other cases that need both press and release events
     switch (keycode) {
