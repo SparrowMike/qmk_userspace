@@ -2,7 +2,7 @@ VIA_ENABLE = no
 
 CONVERT_TO = rp2040_ce
 
-# WPM_ENABLE = yes
+WPM_ENABLE = yes
 # LTO_ENABLE = yes
 
 OLED_ENABLE = yes

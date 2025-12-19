@@ -1,5 +1,8 @@
 TAP_DANCE_ENABLE = yes
 
+# Use mike's userspace for shared animations
+USER_NAME := mike
+
 # OLED_TIMEOUT = 0
 
 VIA_ENABLE = yes

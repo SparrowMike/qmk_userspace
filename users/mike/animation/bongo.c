@@ -480,10 +480,13 @@ static void draw_bongo(bool minimal)
 
     if (!minimal)
     {
+
+#ifdef WPM_ENABLE
         // print wpm
         oled_set_cursor(0, 0);
         sprintf(wpm, "WPM:%03d", get_current_wpm());
         oled_write(wpm, false);
+#endif
 
         // calculate && print clock
         // oled_set_cursor(0, 2);

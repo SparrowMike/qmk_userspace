@@ -54,3 +54,10 @@
 #endif
 
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 100
+
+// Animation Configuration - RIGHT display (slave side)
+// Uncomment ONE animation at a time:
+#define INCLUDE_BONGOCAT
+// #define INCLUDE_LUNA
+// #define INCLUDE_OCEAN
+// #define INCLUDE_STATIC_FACE  // Original klor face

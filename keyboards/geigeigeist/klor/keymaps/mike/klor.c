@@ -2,6 +2,11 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #include "quantum.h"
 
+// Animation includes
+#ifdef INCLUDE_BONGOCAT
+#   include "bongo.c"
+#endif
+
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_kb(oled_rotation_t rotation) {
     return OLED_ROTATION_180;
@@ -96,8 +101,12 @@ bool oled_task_kb(void) {
     if (is_keyboard_master()) {
         render_keyboard_status();
     } else {
+#ifdef INCLUDE_BONGOCAT
+        draw_bongo(false);
+#else
+        // Default to static face if no animation is selected
         oled_write_raw_P(klor_face, sizeof(klor_face));
-    }
-    return false;
+#endif
+    } return false;
 }
 #endif

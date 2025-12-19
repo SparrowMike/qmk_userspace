@@ -3,31 +3,31 @@
 /* #include "../boards.h" */
 
 #ifdef INCLUDE_LAYERS
-#   include "./animation/layers.h"
+#   include "layers.h"
 #endif
 
 #ifdef INCLUDE_LOGO
-#   include "./animation/corne_logo.h"
+#   include "corne_logo.h"
 #endif
 
 #ifdef INCLUDE_CAT
-#   include "./animation/bongo.c"
+#   include "bongo.c"
 #endif
 
 #ifdef INCLUDE_OCEAN
-#   include "./animation/ocean_dream.c"
+#   include "ocean_dream.c"
 #endif
 
 #ifdef INCLUDE_ARASAKA
-#   include "./animation/arasaka.c"
+#   include "arasaka.c"
 #endif
 
 #ifdef INCLUDE_LUNA
-#   include "./animation/luna.c"
+#   include "luna.c"
 #endif
 
 #ifdef INCLUDE_BARS
-#   include "./animation/music-bars.c"
+#   include "music-bars.c"
 #endif
 
 #define HM_A LCTL_T(KC_A)
@@ -363,7 +363,6 @@ bool oled_task_user(){
 #endif
 
 #ifdef INCLUDE_LUNA
-
         led_usb_state = host_keyboard_led_state();
         render_luna(0, 13);
 #endif
