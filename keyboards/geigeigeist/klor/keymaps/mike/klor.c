@@ -2,6 +2,11 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #include "quantum.h"
 
+// Stub for animation-specific keycode handling (klor has no animations that need this)
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
+
 // Animation includes
 #ifdef INCLUDE_BONGOCAT
 #   include "bongo.c"

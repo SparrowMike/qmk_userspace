@@ -1,12 +1,6 @@
 #pragma once
 
-#define MASTER_LEFT
-
-#define TAPPING_TERM 190
-
 #define SPLIT_WPM_ENABLE
-
-#define OLED_TIMEOUT 36000
 
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
@@ -24,8 +18,6 @@
     #define RGBLIGHT_SAT_STEP 17
     #define RGBLIGHT_VAL_STEP 17
 #endif
-
-#define DYNAMIC_KEYMAP_LAYER_COUNT 6
 
 // INFO: graphics ----LEFT----
 #define INCLUDE_LAYERS

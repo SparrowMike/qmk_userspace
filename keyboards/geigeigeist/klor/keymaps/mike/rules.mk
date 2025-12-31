@@ -1,15 +1,8 @@
-VIA_ENABLE = no
+# Use userspace
+USER_NAME := mike
 
+# Platform conversion (must be set before other features)
 CONVERT_TO = rp2040_ce
 
-WPM_ENABLE = yes
+# Klor-specific features
 # LTO_ENABLE = yes
-
-OLED_ENABLE = yes
-OLED_DRIVER = ssd1306
-
-CAPS_WORD_ENABLE = yes
-COMBO_SHOULD_TRIGGER = yes
-COMBO_ENABLE = yes
-
-TAP_DANCE_ENABLE = yes

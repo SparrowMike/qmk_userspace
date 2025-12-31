@@ -1,14 +1,7 @@
 #pragma once
 
-#define MASTER_LEFT
-
-#define TAPPING_TERM 190
-
+#define SPLIT_WPM_ENABLE
 #define OLED_DISPLAY_128X64
-
-#define OLED_TIMEOUT 36000
-
-#define DYNAMIC_KEYMAP_LAYER_COUNT 6
 
 #ifdef RGB_MATRIX_ENABLE
 #        define ENABLE_RGB_MATRIX_ALPHAS_MODS

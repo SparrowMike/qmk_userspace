@@ -1,20 +1,9 @@
-TAP_DANCE_ENABLE = yes
-
-# Use mike's userspace for shared animations
+# Use userspace
 USER_NAME := mike
 
-# OLED_TIMEOUT = 0
-
-VIA_ENABLE = yes
-
+# Platform conversion (must be set before other features)
 CONVERT_TO = rp2040_ce
 
-COMBO_ENABLE = yes
-WPM_ENABLE = yes
+# Crkbd-specific features
 LTO_ENABLE = yes
-
-OLED_ENABLE = yes
-OLED_DRIVER = ssd1306
-
-CAPS_WORD_ENABLE = yes
 
